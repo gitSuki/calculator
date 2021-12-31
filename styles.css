@@ -1,0 +1,49 @@
+* {
+    -webkit-appearance: none;
+    appearance: none;
+    box-sizing: border-box; /* Keeps box size consistent regardless of margin/padding/etc */
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-decoration: none; /* Removes link underlines */
+    color: inherit; /* Overrides blue color of links */
+}
+
+body { /* removes default margin and padding on body */
+    margin: 0px;
+    padding: 0px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 300px;
+    grid-template-rows: 75px, 75px, 75px, 75px, 75px, 75px;
+    justify-content: center;
+}
+
+.row{
+    display: flex;
+}
+
+.display {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.displayTop {
+    font-size: 18px;
+    padding: 5px;
+}
+
+.displayBottom {
+    font-size: 26px;
+    padding: 5px;
+}
+
+button {
+    border: none;
+    font-size: 18px;
+    width: 75px;
+    height: 75px;
+}
