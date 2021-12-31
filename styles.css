@@ -21,6 +21,8 @@ body { /* removes default margin and padding on body */
 
 .row{
     display: flex;
+    align-items: flex-end;
+    background-color: rgb(247, 245, 245);
 }
 
 .display {
@@ -29,6 +31,7 @@ body { /* removes default margin and padding on body */
     width: 75%;
     align-items: flex-end;
     justify-content: flex-end;
+    background-color: rgb(247, 245, 245);
 }
 
 .displayTop {
@@ -39,6 +42,8 @@ body { /* removes default margin and padding on body */
 .displayBottom {
     font-size: 26px;
     padding: 5px;
+    word-wrap: break-word;
+    max-width: 225px;
 }
 
 button {
@@ -46,11 +51,17 @@ button {
     font-size: 18px;
     width: 75px;
     height: 75px;
-    opacity: 0.7;
+    opacity: 0.6;
     transition: all .15s ease-in;
 }
 
 .hover {
     opacity: 1;
-    background-color: rgb(215, 218, 223);
+    background-color: rgb(196, 196, 196);
 }
+
+button:active {
+    transform: scale(1.05);
+    background-color: black;
+    color: white;
+  }

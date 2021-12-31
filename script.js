@@ -1,5 +1,8 @@
 const displayTop = document.querySelector('.displayTop')
 const displayBottom = document.querySelector('.displayBottom')
+let buttons = document.querySelectorAll('button')
+let preValue = displayBottom.textContent 
+let baseNumber = 0
 
 function add(a, b) {
     return a + b
@@ -40,9 +43,19 @@ function operate(a, b, operator) {
     }
 }
 
-let buttons = document.querySelectorAll('button')
+function changeLowerDisplay(id) {
+    (preValue == 0) ? preValue = id : preValue += id
+    displayBottom.textContent = preValue
+}
+
+function buttonClick(input) {
+    changeLowerDisplay(input)
+}
 
 buttons.forEach((buttons) => {
+    buttons.addEventListener ('click', () => {
+        buttonClick(buttons.id)
+    })
     buttons.addEventListener('mouseover', () => {
         buttons.classList.add('hover')
     })
@@ -50,3 +63,4 @@ buttons.forEach((buttons) => {
         buttons.classList.remove('hover')
     })
 })
+
