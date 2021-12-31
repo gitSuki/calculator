@@ -1,3 +1,6 @@
+const displayTop = document.querySelector('.displayTop')
+const displayBottom = document.querySelector('.displayBottom')
+
 function add(a, b) {
     return a + b
 }
@@ -37,3 +40,13 @@ function operate(a, b, operator) {
     }
 }
 
+let buttons = document.querySelectorAll('button')
+
+buttons.forEach((buttons) => {
+    buttons.addEventListener('mouseover', () => {
+        buttons.classList.add('hover')
+    })
+    buttons.addEventListener('mouseleave', () => {
+        buttons.classList.remove('hover')
+    })
+})
