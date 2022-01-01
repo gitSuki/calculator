@@ -1,5 +1,6 @@
 const displayTop = document.querySelector('.displayTop')
 const displayBottom = document.querySelector('.displayBottom')
+const clearButton = document.getElementById('clearButton')
 let buttons = document.querySelectorAll('button')
 let preValue = displayBottom.textContent 
 let baseNumber = 0
@@ -43,8 +44,17 @@ function operate(a, b, operator) {
     }
 }
 
+function deleteBottom () {
+    (preValue.length == 1) ? preValue = 0 : preValue = preValue.substring(0, preValue.length - 1)
+    displayBottom.textContent = preValue
+}
+
+function deleteFunc () {
+    deleteBottom()
+}
+
 function changeLowerDisplay(id) {
-    (preValue == 0) ? preValue = id : preValue += id
+    (isNaN(id)) ? console.log('NaN') : (preValue == 0) ? preValue = id : preValue += id
     displayBottom.textContent = preValue
 }
 
@@ -62,5 +72,9 @@ buttons.forEach((buttons) => {
     buttons.addEventListener('mouseleave', () => {
         buttons.classList.remove('hover')
     })
+})
+
+clearButton.addEventListener('click', () => {
+    deleteFunc()
 })
 
