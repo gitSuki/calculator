@@ -35,12 +35,12 @@ body { /* removes default margin and padding on body */
 }
 
 .displayTop {
-    font-size: 18px;
+    font-size: 14px;
     padding: 5px;
 }
 
 .displayBottom {
-    font-size: 26px;
+    font-size: 28px;
     padding: 5px;
     word-wrap: break-word;
     max-width: 225px;
