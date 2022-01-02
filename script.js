@@ -2,6 +2,7 @@ const displayTop = document.querySelector('.displayTop')
 const displayBottom = document.querySelector('.displayBottom')
 const operatorRegex = /[\x\-\+\^\/]/
 
+let initiatedOperation = false
 let recentlySolved = false
 let buttons = document.querySelectorAll('button')
 let preValue = displayBottom.textContent 
@@ -11,7 +12,7 @@ function add(a, b) {
 }
 
 function subtract(a, b) {
-    return a - b
+    return parseInt(a) - parseInt(b)
 }
 
 function multiply(a, b) {
@@ -37,7 +38,7 @@ function operate(a, operator, b) {
         case 'x':
             return multiply(a,b)
 
-        case '÷':
+        case '/':
             return divide(a,b)
 
         case '^':
@@ -46,7 +47,7 @@ function operate(a, operator, b) {
 }
 
 function deleteBottom() {
-    (preValue.length === 1 || preValue.length === 2 && preValue.charAt(0) === '-' ) ? preValue = 0 : preValue = preValue.substring(0, preValue.length - 1)
+    (preValue.length === 1 || preValue.length === 2 && preValue.charAt(0) === '-' ) ? preValue = 0 : preValue = preValue.toString().substring(0, preValue.length - 1)
     displayBottom.textContent = preValue
 }
 
@@ -82,18 +83,26 @@ function convertEquation () { //converts all the text in the display area to an 
     return equation
 }
 
-function evaluate() {
+function evaluate(id) {
     equation = convertEquation()
     sum = operate(equation[0], equation[1], equation[2])
     recentlySolved = true
-    displayTop.textContent = equation.join(' ') + ` =`
+    displayTop.textContent = equation.join(' ') + ` ` + id
     changeDisplayBottom(sum.toString())
+    return sum
 }
 
 function buttonClick(id) {
-    console.log(id)
     if (operatorRegex.test(id)) { //if the id is a mathematical operator
-        changeDisplayTop(id)
+        if (displayTop.textContent.length > 1) {        
+            sum = evaluate(id)
+            preValue = sum
+            changeDisplayTop(id)
+            changeDisplayBottom(sum)
+        }
+        else {
+            changeDisplayTop(id)
+        }   
     }
     else if (id === `clearButton`) {
         deleteFunc()
@@ -102,10 +111,10 @@ function buttonClick(id) {
         plusOrMinus()
     }
     else if (id === `=`) {
-        evaluate()
+        evaluate(id)
     }
     else {
-    changeDisplayBottom(id)
+        changeDisplayBottom(id)
     }
 }
 
