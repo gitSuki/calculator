@@ -1,13 +1,13 @@
 const displayTop = document.querySelector('.displayTop')
 const displayBottom = document.querySelector('.displayBottom')
 const operatorRegex = /[\x\-\+\^\/]/
+
 let recentlySolved = false
 let buttons = document.querySelectorAll('button')
 let preValue = displayBottom.textContent 
-let baseNumber = 0
 
 function add(a, b) {
-    return a + b
+    return parseInt(a) + parseInt(b)
 }
 
 function subtract(a, b) {
@@ -28,25 +28,25 @@ function exponent(a, b) {
 
 function operate(a, operator, b) {
     switch(operator) {
-        case 'addition':
+        case '+':
             return add(a,b);
 
-        case 'subtraction':
+        case '-':
             return subtract(a,b)
 
         case 'x':
             return multiply(a,b)
 
-        case 'division':
+        case '÷':
             return divide(a,b)
 
-        case 'power':
+        case '^':
             return exponent(a,b)
     }
 }
 
 function deleteBottom() {
-    (preValue.length === 1) ? preValue = 0 : preValue = preValue.substring(0, preValue.length - 1)
+    (preValue.length === 1 || preValue.length === 2 && preValue.charAt(0) === '-' ) ? preValue = 0 : preValue = preValue.substring(0, preValue.length - 1)
     displayBottom.textContent = preValue
 }
 
@@ -59,8 +59,13 @@ function deleteFunc() {
     (recentlySolved) ? deleteTop() : (preValue === 0) ? deleteTop() : deleteBottom()
 }
 
+function plusOrMinus() {
+    (preValue.charAt(0) === '-' ) ? preValue = preValue.slice(1) : preValue = `-` + preValue
+    displayBottom.textContent = preValue
+}
+
 function changeDisplayBottom(oldPreValue) {
-    (isNaN(oldPreValue)) ? console.log('NaN') : (preValue == 0 || recentlySolved) ? preValue = oldPreValue : preValue += oldPreValue
+    (preValue == 0 || recentlySolved) ? preValue = oldPreValue : preValue += oldPreValue
     displayBottom.textContent = preValue
 }
 
@@ -92,6 +97,9 @@ function buttonClick(id) {
     }
     else if (id === `clearButton`) {
         deleteFunc()
+    }
+    else if (id === '±') {
+        plusOrMinus()
     }
     else if (id === `=`) {
         evaluate()
